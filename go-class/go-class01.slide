@@ -1,0 +1,251 @@
+Go Class
+Zalando TechAcademy
+21:37 25 Feb 2016
+
+Tags: Go, Gin, TechAcademy
+
+Sandor Szücs
+NinjaEngineer, Zalando
+sandor.szuecs@zalando.de
+# TODO: https://sandor.szuecs.net/
+@sszuecs
+
+* Requirements
+- install https://golang.org/doc/install
+- set ENV: GOROOT, GOPATH, GOBIN
+- test: https://golang.org/doc/install#testing
+
+* Why go?
+.image gopher.jpeg
+.caption _Gopher_ by [[http://www.reneefrench.com][Renée French]]
+
+* Why go?
+# See httprouter or Skipper
+- Fast
+- Concurrency (no GIL == CPU bound computation can use more then 1 core)
+- Easy to read and to write
+- Closures (Lambda, anonymous functions)
+- Tooling
+- statically linked binaries - docker container < 20MB (you only need a ELF loader)
+- Many new projects in Go: K8s, Influxdb, Docker, ..
+- Many companies are using it:
+.link https://github.com/zalando/skipper
+.link https://godoc.org/github.com/google/seesaw Google LB seesaw
+- Sawzall Google Data engineer lang
+.link https://github.com/prometheus/prometheus SoundCloud's Prometheus
+.link https://eng.uber.com/go-geofence/ Uber geofence lookups
+- Makes fun!
+
+* Hello World
+    % go run hello.go
+.play hello.go
+
+* Goals of Go
+- The efficiency of a statically-typed compiled language
+- with ease of programming of a dynamic language.
+- Safety: type-safe and memory-safe.
+- Good support for concurrency and communication.
+- Efficient, latency-free garbage collection.
+- High-speed compilation. (1.5 and 1.6 slower but better ASM)
+.caption Goals 2009 by Rob Pike
+
+* Learn GO
+.link https://tour.golang.org/welcome/1
+.link https://golang.org/doc/code.html
+.link https://golang.org/doc/effective_go.html
+.link https://talks.golang.org/2014/names.slide#1
+.link http://www.infoq.com/news/2016/03/go-patterns
+
+* Basics - var, struct, utf8
+.play basics.go
+
+* Basics - OO
+- no type hierarchy
+- structs, pointers and methods
+.play basics_oo.go
+
+* Basics - package and exported names
+- package declaration creates a namespace for variables, types, methods, functions, ..
+.code src/foo/a.go
+
+* Basics - package and exported names
+.code pkg_main.go
+
+* Basics - interface
+- Specify behaviour of a method
+- Interfaces are implicitly satisfied
+.play a_stringer.go
+
+* Basics - interface Examples
+- stringer
+    String() string
+- io.Reader
+    Read(p []byte) (n int, err error)
+- sort.Interface
+    Len() int
+    Less(i,j int) bool
+    Swap(i,j int)
+* Basics - interfaces are composable
+.code readwriter.go
+
+* type system
+- strong, static types
+- no subtyping nor inheritance
+- normal method calls: static dispatch
+- dynamic dispatch -> use interfaces
+- type inference:  x := 0  // same as: var x int = 0
+- no generics -> use interfaces or code generation
+- no exceptions -> use err != nil check and defer fd.Close()
+
+* err idiom - example
+.play err.go /^func main/,/^}/
+
+* array, slice, map
+- array: static size!
+    ary := [10]int64
+    ary2 := [...]float64{7.0, 8.5, 9.1}
+- slice: array that can grow
+    sl := []int64
+    sl2 := []float64{7.0, 8.5, 9.1}
+- map: HashMap
+   h := map[string]int {
+      "foo": 23,
+      "bar": 42,
+   }
+
+* array, slice, map - iterator
+	sl2 := []float64{7.0, 8.5, 9.1}
+	for idx, item := range sl2 {
+		fmt.Printf("%d: %0.2f\n", idx, item)
+	}
+
+	h := map[string]int{
+		"foo": 23,
+		"bar": 42,
+	}
+	for k, v := range h {
+		fmt.Printf("%s: %d\n", k, v)
+	}
+
+* Concurrency #1
+- no GIL --> good for CPU workload
+- paradigm: share data by communication
+.link https://divan.github.io/posts/go_concurrency_visualize/
+- use channels to orchestrate goroutines and share data
+.link https://golang.org/doc/effective_go.html#concurrency
+# .link http://blog.codeship.com/an-intro-to-concurrency-patterns-in-go/
+- if you really need to tune, remove channels and replace for example with sync.Mutex
+.link https://github.com/golang/go/wiki/MutexOrChannel
+
+* Concurrency #2
+.play mutex.go
+
+
+* go tools #1
+- build
+    % go build cmd/go-gin-webapp/server.go
+- build, run
+    % go run cmd/go-gin-webapp/server.go
+- build, install to $GOBIN
+    % go install cmd/go-gin-webapp/server.go  # name: server
+    % go install ./...           # triple dot: install all binaries (name = subdirectory-name)
+- download, build, install (-u update)
+    % go get -u github.com/gin-gonic/gin
+    % go get github.com/zalando-techmonkeys/chimp/...
+
+* go tools #2
+- run tests
+    % go test ./... [-v]
+    % go test -race                                  # race detector, no false positives
+    % go test -cover ./...
+    % go test -coverprofile=coverage.out ./aspects   # write output
+    % go tool cover -func=coverage.out               # show in STDOUT
+    % go tool cover -html=coverage.out               # show in browser
+- callgraph: % callgraph
+
+# TODO: TEST this!
+* go tools #3
+- run benchmarks
+    % go test -run=^$ -bench=. | tee bench.0                 # run benchmarks
+    % benchcmp bench.0 bench.1                               # compare benchmarks
+    % go test -run=^$ -bench=. -cpuprofile=prof.cpu          # record benchmarks and creates binary
+    % go test -run=^$ -bench=. -memprofile=prof.mem          # profile memory
+    % go tool pprof <binary> prof.cpu
+- profiling: % go tool pprof
+  (pprof) top        # show top functions
+  (pprof) top --cum  # show top functions, cumulative
+  (pprof) web        # show svg callgraph with times
+  (pprof) list f     # show all lines in f() with profiling data
+  (pprof) disasm f   # disassemble f()
+
+* go tools #4
+- static analysis
+    % go vet ./...  # examines Go source code and reports suspicious constructs
+    % golint ./...
+- IDE helpers
+    % go doc strings # documentation system
+    % godef          # code navigation: jump to definition and back
+    % gofmt          # formats your code
+    % gofmt -r       # refacter / rewrite code
+    % gorename       # refacter / rewrite code
+    % goimports      # add/remove imports as needed and formats your code
+    % oracle         # lookup caller, callee, callstack, implements, ..
+    % gocode         # autocompletion
+    % gotests        # generate test stubs from code
+    % go-eldoc       # emacs eldoc integration
+
+* go tools #5
+- debugger: https://github.com/derekparker/delve
+
+* WebApps with Gin
+- Gin is fast: https://github.com/gin-gonic/go-http-routing-benchmark
+- better abstraction, f(Context) instead of f(Reader, Writer)
+- Microservice idea is based on
+.link http://txt.fliglio.com/2014/07/restful-microservices-in-go-with-gin/
+- Project with client/service in one src, HTTP/HTTPS and OAuth2:
+.link https://github.com/zalando-techmonkeys/chimp
+- OAuth2, Monitoring, Logging: gin-* middleware projects
+.link https://github.com/zalando-techmonkeys
+.link https://github.com/zalando-techmonkeys/gin-oauth2
+
+* WebApp skeleton
+
+.link https://github.com/szuecs/go-gin-webapp
+provides:
+- HTTPS
+- OAuth2 with Zalando IAM integration
+- Monitoring: metrics and /health
+- Logging with glog
+- microservice and an optional CLI client
+
+# TODO: testen (goal: < 5 minutes)
+* Demo - Webapp-Hello-world
+- add /hello endpoint
+- run and test
+- build Docker container
+- push to pierone
+- run in AWS or GCE
+
+* Manage dependencies
+- godep
+    % godep save    # generates ./Godeps folder
+    % godep restore # make sure you have all specified projects and checkout the defined commit hash
+- vendor (since go 1.6)
+  TODO
+
+
+* Linker magic
+TODO
+
+* Code generation
+TODO
+
+####### slide magic
+# .play -edit x.go
+# .code x.go /^func main/,/^}/
+# .play y.go
+# .image image.jpg
+# .iframe http://foo
+# .link http://foo label
+# .html file.html
+###################
