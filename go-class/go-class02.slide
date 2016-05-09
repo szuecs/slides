@@ -1,0 +1,145 @@
+Go Class - TODO find a name
+Zalando TechAcademy
+21:37 25 Feb 2016
+
+Tags: Go, Gin, TechAcademy
+
+Sandor Szücs
+NinjaEngineer, Zalando
+sandor.szuecs@zalando.de
+# TODO: https://sandor.szuecs.net/
+@sszuecs
+[[https://github.com/szuecs/slides/][Slides available https://github.com/szuecs/slides/]]
+# [[TODO][Follow up: ]]
+
+* Requirements
+- install https://golang.org/doc/install
+- set ENV: GOROOT, GOPATH, GOBIN
+- test: https://golang.org/doc/install#testing
+- You should have basic knowledge of Go, similar to Go Class 1
+
+* Concurrency
+  go func() // spawns func as a goroutine
+- no GIL --> good for CPU workload
+- paradigm: share data by communication
+.link https://divan.github.io/posts/go_concurrency_visualize/
+- use channels to orchestrate goroutines and share data
+.link https://golang.org/doc/effective_go.html#concurrency
+# .link http://blog.codeship.com/an-intro-to-concurrency-patterns-in-go/
+- if you really need to tune, remove channels and replace for example with sync.Mutex
+.link https://github.com/golang/go/wiki/MutexOrChannel
+
+* Concurrency - Mutex
+.play mutex.go
+
+* Concurrency - Channel
+.play channels.go
+
+* go tools #1
+- build
+    % go build cmd/go-gin-webapp/server.go
+- build, run
+    % go run cmd/go-gin-webapp/server.go
+- build, install to $GOBIN
+    % go install cmd/go-gin-webapp/server.go  # name: server
+    % go install ./...           # triple dot: install all binaries (name = subdirectory-name)
+- download, build, install (-u update)
+    % go get -u github.com/gin-gonic/gin
+    % go get github.com/zalando-techmonkeys/chimp/...
+
+* go tools #2
+- run tests
+    % go test ./... [-v]
+    % go test -race                                  # race detector, no false positives
+    % go test -cover ./...
+    % go test -coverprofile=coverage.out ./aspects   # write output
+    % go tool cover -func=coverage.out               # show in STDOUT
+    % go tool cover -html=coverage.out               # show in browser
+- callgraph: % callgraph
+
+# TODO: TEST this!
+* go tools #3
+- run benchmarks
+    % go test -run=^$ -bench=. | tee bench.0                 # run benchmarks
+    % benchcmp bench.0 bench.1                               # compare benchmarks
+    % go test -run=^$ -bench=. -cpuprofile=prof.cpu          # record benchmarks and creates binary
+    % go test -run=^$ -bench=. -memprofile=prof.mem          # profile memory
+    % go tool pprof <binary> prof.cpu
+- profiling: % go tool pprof
+  (pprof) top        # show top functions
+  (pprof) top --cum  # show top functions, cumulative
+  (pprof) web        # show svg callgraph with times
+  (pprof) list f     # show all lines in f() with profiling data
+  (pprof) disasm f   # disassemble f()
+
+* go tools #4
+- static analysis
+    % go vet ./...  # examines Go source code and reports suspicious constructs
+    % golint ./...
+- IDE helpers
+    % go doc strings # documentation system
+    % godef          # code navigation: jump to definition and back
+    % gofmt          # formats your code
+    % gofmt -r       # refacter / rewrite code
+    % gorename       # refacter / rewrite code
+    % goimports      # add/remove imports as needed and formats your code
+    % oracle         # lookup caller, callee, callstack, implements, ..
+    % gocode         # autocompletion
+    % gotests        # generate test stubs from code
+    % go-eldoc       # emacs eldoc integration
+
+* go tools #5
+- debugger: https://github.com/derekparker/delve
+
+* Manage dependencies
+- godep
+    % godep save    # generates ./Godeps folder
+    % godep restore # make sure you have all specified projects and checkout the defined commit hash
+- vendor (since go 1.6)
+  TODO
+
+* WebApps with Gin
+- Gin is fast: https://github.com/gin-gonic/go-http-routing-benchmark
+- better abstraction, f(Context) instead of f(Reader, Writer)
+- Microservice idea is based on
+.link http://txt.fliglio.com/2014/07/restful-microservices-in-go-with-gin/
+- Project with client/service in one src, HTTP/HTTPS and OAuth2:
+.link https://github.com/zalando-techmonkeys/chimp
+- OAuth2, Monitoring, Logging: gin-* middleware projects
+.link https://github.com/zalando-techmonkeys
+.link https://github.com/zalando-techmonkeys/gin-oauth2
+
+* WebApp skeleton
+
+.link https://github.com/szuecs/go-gin-webapp
+provides:
+- HTTPS
+- OAuth2 with Zalando IAM integration
+- Monitoring: metrics and /health
+- Logging with glog
+- microservice and an optional CLI client
+
+# TODO: testen (goal: < 5 minutes)
+* Demo - Webapp-Hello-world
+- add /hello endpoint
+- run and test
+- build Docker container
+- push to pierone
+- run in AWS or GCE
+
+* Linker magic
+TODO
+
+* Code generation
+TODO
+
+####### slide magic
+# [[http://reallink][link name]]
+# .play -edit x.go
+# .code x.go /^func main/,/^}/
+# .play y.go
+# .image image.jpg
+# .iframe http://foo
+# .link http://foo label
+# .html file.html
+###################

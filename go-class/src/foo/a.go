@@ -7,7 +7,8 @@ type Foo struct {
 	b string // not exported
 }
 
-func New(a, b string) *Foo { // just a convenient name, but not necessary ;)
+// New is an exported package function that returns the reference of a newly created object Foo
+func New(a, b string) *Foo {
 	return &Foo{a, b}
 }
 

@@ -1,40 +1,47 @@
-Go Class
+Go Class - Kickstarter
 Zalando TechAcademy
-21:37 25 Feb 2016
+16:23 09 Mar 2016
 
-Tags: Go, Gin, TechAcademy
+Tags: Go, TechAcademy
 
 Sandor Szücs
 NinjaEngineer, Zalando
 sandor.szuecs@zalando.de
 # TODO: https://sandor.szuecs.net/
 @sszuecs
+[[https://github.com/szuecs/slides/][Slides available https://github.com/szuecs/slides/]]
+# [[TODO][Follow up: ]]
 
 * Requirements
 - install https://golang.org/doc/install
 - set ENV: GOROOT, GOPATH, GOBIN
 - test: https://golang.org/doc/install#testing
+- If you are not prepared, use [[https://play.golang.org/][https://play.golang.org/]]
 
 * Why go?
 .image gopher.jpeg
 .caption _Gopher_ by [[http://www.reneefrench.com][Renée French]]
 
 * Why go?
-# See httprouter or Skipper
-- Fast
-- Concurrency (no GIL == CPU bound computation can use more then 1 core)
+- Fast and fast to compile
+- Concurrency + no GIL: CPU bound computation can use more then 1 core
+- support for Closures (Lambda, anonymous functions)
 - Easy to read and to write
-- Closures (Lambda, anonymous functions)
 - Tooling
-- statically linked binaries - docker container < 20MB (you only need a ELF loader)
+
+statically linked binaries
+
+- docker container < 20MB (you only need: FROM scratch)
+- create clients for all major OS (Linux, MacOSX, Windows)
+
+* Why go?
 - Many new projects in Go: K8s, Influxdb, Docker, ..
-- Many companies are using it:
+- Many companies are using it includeing Google, Soundclud, Uber, Zalando:
 .link https://github.com/zalando/skipper
 .link https://godoc.org/github.com/google/seesaw Google LB seesaw
-- Sawzall Google Data engineer lang
+.link http://www.unofficialgoogledatascience.com/2015/12/replacing-sawzall-case-study-in-domain.html Migrate Sawzall to Go - Google Data Engineering
 .link https://github.com/prometheus/prometheus SoundCloud's Prometheus
 .link https://eng.uber.com/go-geofence/ Uber geofence lookups
-- Makes fun!
 
 * Hello World
     % go run hello.go
@@ -49,19 +56,38 @@ sandor.szuecs@zalando.de
 - High-speed compilation. (1.5 and 1.6 slower but better ASM)
 .caption Goals 2009 by Rob Pike
 
-* Learn GO
-.link https://tour.golang.org/welcome/1
-.link https://golang.org/doc/code.html
-.link https://golang.org/doc/effective_go.html
-.link https://talks.golang.org/2014/names.slide#1
-.link http://www.infoq.com/news/2016/03/go-patterns
-
-* Basics - var, struct, utf8
+* Basics - var, utf8
 .play basics.go
+
+* Basics - struct
+.play basics.go
+
+* Basics - branches
+.play branches.go  /^func main/,/^}/
+
+* Basics - loops
+.play loop.go  /^func main/,/^}/
+
+* Exame 1 - Write a function that implements string reverse (Hint: use bytes.Buffer)
+
+  package main
+
+  import "fmt"
+
+  func main() {
+      fmt.Println(reverse("abc"))
+  }
+
+  func reverse(s string) string {
+      // TODO
+  }
+
+* err idiom - example
+.play err.go /^func main/,/^}/
 
 * Basics - OO
 - no type hierarchy
-- structs, pointers and methods
+- structs, pointers and methods (call by reference)
 .play basics_oo.go
 
 * Basics - package and exported names
@@ -70,6 +96,29 @@ sandor.szuecs@zalando.de
 
 * Basics - package and exported names
 .code pkg_main.go
+
+* Exame 2 - Refactor your string reverse function to a method on type RString
+
+  package rstring
+
+  type RString struct {
+  	S string
+  }
+
+  func New(s string) *RString {
+  	return &RString{S: s}
+  }
+
+  func (s *RString) Reverse() *RString {
+        // TODO
+  }
+
+  // call it from a main
+  package main
+  func main() {
+    rs := rstring.New("hello world")
+    fmt.Println(rs.Reverse())
+  }
 
 * Basics - interface
 - Specify behaviour of a method
@@ -88,7 +137,31 @@ sandor.szuecs@zalando.de
 * Basics - interfaces are composable
 .code readwriter.go
 
-* type system
+* Exame 3 - Implement the stringer and sort interface on type RString and a list of RString
+
+  package rstring
+
+  type RString struct { S string }
+
+  // String implements the stringer interface
+  func (s *RString) String() string {
+      // TODO
+  }
+
+  type SortableRString []*RString
+
+  // implement the sort interface
+  func (s SortableRString) Len() int {
+      TODO
+  }
+  func (s SortableRString) Less(i,j int) bool {
+      TODO
+  }
+  func (s SortableRString) Swap(i,j int) {
+      TODO
+  }
+
+* Recap: type system
 - strong, static types
 - no subtyping nor inheritance
 - normal method calls: static dispatch
@@ -96,9 +169,6 @@ sandor.szuecs@zalando.de
 - type inference:  x := 0  // same as: var x int = 0
 - no generics -> use interfaces or code generation
 - no exceptions -> use err != nil check and defer fd.Close()
-
-* err idiom - example
-.play err.go /^func main/,/^}/
 
 * array, slice, map
 - array: static size!
@@ -127,120 +197,15 @@ sandor.szuecs@zalando.de
 		fmt.Printf("%s: %d\n", k, v)
 	}
 
-* Concurrency #1
-- no GIL --> good for CPU workload
-- paradigm: share data by communication
-.link https://divan.github.io/posts/go_concurrency_visualize/
-- use channels to orchestrate goroutines and share data
-.link https://golang.org/doc/effective_go.html#concurrency
-# .link http://blog.codeship.com/an-intro-to-concurrency-patterns-in-go/
-- if you really need to tune, remove channels and replace for example with sync.Mutex
-.link https://github.com/golang/go/wiki/MutexOrChannel
-
-* Concurrency #2
-.play mutex.go
-
-
-* go tools #1
-- build
-    % go build cmd/go-gin-webapp/server.go
-- build, run
-    % go run cmd/go-gin-webapp/server.go
-- build, install to $GOBIN
-    % go install cmd/go-gin-webapp/server.go  # name: server
-    % go install ./...           # triple dot: install all binaries (name = subdirectory-name)
-- download, build, install (-u update)
-    % go get -u github.com/gin-gonic/gin
-    % go get github.com/zalando-techmonkeys/chimp/...
-
-* go tools #2
-- run tests
-    % go test ./... [-v]
-    % go test -race                                  # race detector, no false positives
-    % go test -cover ./...
-    % go test -coverprofile=coverage.out ./aspects   # write output
-    % go tool cover -func=coverage.out               # show in STDOUT
-    % go tool cover -html=coverage.out               # show in browser
-- callgraph: % callgraph
-
-# TODO: TEST this!
-* go tools #3
-- run benchmarks
-    % go test -run=^$ -bench=. | tee bench.0                 # run benchmarks
-    % benchcmp bench.0 bench.1                               # compare benchmarks
-    % go test -run=^$ -bench=. -cpuprofile=prof.cpu          # record benchmarks and creates binary
-    % go test -run=^$ -bench=. -memprofile=prof.mem          # profile memory
-    % go tool pprof <binary> prof.cpu
-- profiling: % go tool pprof
-  (pprof) top        # show top functions
-  (pprof) top --cum  # show top functions, cumulative
-  (pprof) web        # show svg callgraph with times
-  (pprof) list f     # show all lines in f() with profiling data
-  (pprof) disasm f   # disassemble f()
-
-* go tools #4
-- static analysis
-    % go vet ./...  # examines Go source code and reports suspicious constructs
-    % golint ./...
-- IDE helpers
-    % go doc strings # documentation system
-    % godef          # code navigation: jump to definition and back
-    % gofmt          # formats your code
-    % gofmt -r       # refacter / rewrite code
-    % gorename       # refacter / rewrite code
-    % goimports      # add/remove imports as needed and formats your code
-    % oracle         # lookup caller, callee, callstack, implements, ..
-    % gocode         # autocompletion
-    % gotests        # generate test stubs from code
-    % go-eldoc       # emacs eldoc integration
-
-* go tools #5
-- debugger: https://github.com/derekparker/delve
-
-* WebApps with Gin
-- Gin is fast: https://github.com/gin-gonic/go-http-routing-benchmark
-- better abstraction, f(Context) instead of f(Reader, Writer)
-- Microservice idea is based on
-.link http://txt.fliglio.com/2014/07/restful-microservices-in-go-with-gin/
-- Project with client/service in one src, HTTP/HTTPS and OAuth2:
-.link https://github.com/zalando-techmonkeys/chimp
-- OAuth2, Monitoring, Logging: gin-* middleware projects
-.link https://github.com/zalando-techmonkeys
-.link https://github.com/zalando-techmonkeys/gin-oauth2
-
-* WebApp skeleton
-
-.link https://github.com/szuecs/go-gin-webapp
-provides:
-- HTTPS
-- OAuth2 with Zalando IAM integration
-- Monitoring: metrics and /health
-- Logging with glog
-- microservice and an optional CLI client
-
-# TODO: testen (goal: < 5 minutes)
-* Demo - Webapp-Hello-world
-- add /hello endpoint
-- run and test
-- build Docker container
-- push to pierone
-- run in AWS or GCE
-
-* Manage dependencies
-- godep
-    % godep save    # generates ./Godeps folder
-    % godep restore # make sure you have all specified projects and checkout the defined commit hash
-- vendor (since go 1.6)
-  TODO
-
-
-* Linker magic
-TODO
-
-* Code generation
-TODO
+* References - Learn GO
+.link https://tour.golang.org/welcome/1
+.link https://golang.org/doc/code.html
+.link https://golang.org/doc/effective_go.html
+.link https://talks.golang.org/2014/names.slide#1
+.link http://www.infoq.com/news/2016/03/go-patterns
 
 ####### slide magic
+# [[http://reallink][link name]]
 # .play -edit x.go
 # .code x.go /^func main/,/^}/
 # .play y.go
