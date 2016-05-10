@@ -2,8 +2,7 @@
 
 ## Requirements
 
-- Install golang.org/x/tools/present
-  For example install a bunch of useful go tools:
+Install golang.org/x/tools/present, for example install a bunch of useful go tools:
 
     % go get golang.org/x/tools/...
 
