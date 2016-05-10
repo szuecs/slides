@@ -45,7 +45,7 @@ statically linked binaries
 
 * Hello World
     % go run hello.go
-.play hello.go
+.play src/basics/hello.go
 
 * Goals of Go
 - The efficiency of a statically-typed compiled language
@@ -57,16 +57,16 @@ statically linked binaries
 .caption Goals 2009 by Rob Pike
 
 * Basics - var, utf8
-.play basics.go
+.play src/basics/basics.go
 
 * Basics - struct
-.play basics.go
+.play src/basics/struct.go
 
 * Basics - branches
-.play branches.go  /^func main/,/^}/
+.play src/basics/branches.go /^func main/,/^}/
 
 * Basics - loops
-.play loop.go  /^func main/,/^}/
+.play src/basics/loop.go  /^func main/,/^}/
 
 * Exame 1 - Write a function that implements string reverse (Hint: use bytes.Buffer)
 
@@ -83,12 +83,12 @@ statically linked binaries
   }
 
 * err idiom - example
-.play err.go /^func main/,/^}/
+.play src/basics/err.go /^func main/,/^}/
 
 * Basics - OO
 - no type hierarchy
 - structs, pointers and methods (call by reference)
-.play basics_oo.go
+.play src/basics/basics_oo.go
 
 * Basics - package and exported names
 - package declaration creates a namespace for variables, types, methods, functions, ..
@@ -135,7 +135,7 @@ statically linked binaries
     Less(i,j int) bool
     Swap(i,j int)
 * Basics - interfaces are composable
-.code readwriter.go
+.code src/basics/readwriter.go
 
 * Exame 3 - Implement the stringer and sort interface on type RString and a list of RString
 
