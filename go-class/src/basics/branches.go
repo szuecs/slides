@@ -8,7 +8,7 @@ import (
 func main() {
 	const str string = "this is a 日本語 string\n"
 	if len(str) > 0 {
-		fmt.Printf("ch: %q, rune: %q\n", ch, r[11])
+		fmt.Printf("str: %q\n", str)
 	}
 
 	switch os := runtime.GOOS; os {

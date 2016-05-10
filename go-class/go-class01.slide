@@ -36,7 +36,7 @@ statically linked binaries
 
 * Why go?
 - Many new projects in Go: K8s, Influxdb, Docker, ..
-- Many companies are using it includeing Google, Soundclud, Uber, Zalando:
+- Many companies are using it including Google, Soundcloud, Uber, Zalando:
 .link https://github.com/zalando/skipper
 .link https://godoc.org/github.com/google/seesaw Google LB seesaw
 .link http://www.unofficialgoogledatascience.com/2015/12/replacing-sawzall-case-study-in-domain.html Migrate Sawzall to Go - Google Data Engineering
