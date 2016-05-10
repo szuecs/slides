@@ -37,11 +37,11 @@ statically linked binaries
 * Why go?
 - Many new projects in Go: K8s, Influxdb, Docker, ..
 - Many companies are using it including Google, Soundcloud, Uber, Zalando:
-.link https://github.com/zalando/skipper
-.link https://godoc.org/github.com/google/seesaw Google LB seesaw
-.link http://www.unofficialgoogledatascience.com/2015/12/replacing-sawzall-case-study-in-domain.html Migrate Sawzall to Go - Google Data Engineering
-.link https://github.com/prometheus/prometheus SoundCloud's Prometheus
-.link https://eng.uber.com/go-geofence/ Uber geofence lookups
+- [[https://github.com/zalando/skipper][Zalando's HTTP router]] https://github.com/zalando/skipper
+- [[https://godoc.org/github.com/google/seesaw][Google LB]] https://godoc.org/github.com/google/seesaw
+- [[http://www.unofficialgoogledatascience.com/2015/12/replacing-sawzall-case-study-in-domain.html][Migrate Sawzall to Go - Google Data Engineering Language]]
+- [[https://github.com/prometheus/prometheus][SoundCloud's Prometheus]] https://github.com/prometheus/prometheus
+- [[https://eng.uber.com/go-geofence/][Uber's geofence lookups]]
 
 * Hello World
     % go run hello.go

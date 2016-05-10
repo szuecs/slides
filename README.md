@@ -2,7 +2,10 @@
 
 ## Requirements
 
-    % go get -u golang.org/x/tools/present
+- Install golang.org/x/tools/present
+  For example install a bunch of useful go tools:
+
+    % go get golang.org/x/tools/...
 
 ## Run
 
