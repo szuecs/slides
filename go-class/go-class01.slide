@@ -197,6 +197,13 @@ statically linked binaries
 		fmt.Printf("%s: %d\n", k, v)
 	}
 
+* Dependencies
+- Use godep
+
+    echo vendor >> .gitignore
+    echo Godeps/_workspace >> .gitignore
+    git add Godeps/Godeps.json
+
 * References - Learn GO
 .link https://tour.golang.org/welcome/1
 .link https://golang.org/doc/code.html
