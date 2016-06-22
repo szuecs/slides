@@ -68,6 +68,11 @@ statically linked binaries
 * Basics - loops
 .play src/basics/loop.go  /^func main/,/^}/
 
+* Basics - OO
+- no type hierarchy
+- structs, pointers and methods (call by reference)
+.play src/basics/basics_oo.go
+
 * Exame 1 - Write a function that implements string reverse (Hint: use bytes.Buffer)
 
   package main
@@ -82,13 +87,13 @@ statically linked binaries
       // TODO
   }
 
+* empty
+
+* Solution Exame 1
+.play src/exame1/exame1.go  /^func reverse/,/^}/
+
 * err idiom - example
 .play src/basics/err.go /^func main/,/^}/
-
-* Basics - OO
-- no type hierarchy
-- structs, pointers and methods (call by reference)
-.play src/basics/basics_oo.go
 
 * Basics - package and exported names
 - package declaration creates a namespace for variables, types, methods, functions, ..
@@ -99,6 +104,7 @@ statically linked binaries
 
 * Exame 2 - Refactor your string reverse function to a method on type RString
 
+  // $ cat ./src/rstring/rstring.go
   package rstring
 
   type RString struct {
@@ -113,12 +119,21 @@ statically linked binaries
         // TODO
   }
 
-  // call it from a main
+  // run it: $ GOPATH=`pwd` go run exame2.go
+  // $ cat ./exame2.go
   package main
   func main() {
     rs := rstring.New("hello world")
     fmt.Println(rs.Reverse())
   }
+
+* expected result
+  $ GOPATH=`pwd` go run exame2.go
+  &{dlrow olleh}
+
+* Solution Exame 2
+.code src/exame2/src/rstring/rstring.go  /^import .*/,/\)/
+.code src/exame2/src/rstring/rstring.go  /^\/\/ START/,/END/
 
 * Basics - interface
 - Specify behaviour of a method
@@ -160,6 +175,14 @@ statically linked binaries
   func (s SortableRString) Swap(i,j int) {
       TODO
   }
+
+* expected result
+  $ GOPATH=`pwd` go run exame3.go
+  [hello world a abc ab]
+  [a ab abc hello world]
+
+* Solution Exame 3
+.code src/exame3/src/rstring/rstring.go  /^\/\/ START/,/END/
 
 * Recap: type system
 - strong, static types
