@@ -59,14 +59,17 @@ statically linked binaries
 * Basics - var, utf8
 .play src/basics/basics.go
 
-* Basics - struct
-.play src/basics/struct.go
-
 * Basics - branches
 .play src/basics/branches.go /^func main/,/^}/
 
 * Basics - loops
 .play src/basics/loop.go  /^func main/,/^}/
+
+* Basics - Pointers
+.play src/basics/ptr.go
+
+* Basics - struct
+.play src/basics/struct.go
 
 * Basics - OO
 - no type hierarchy
@@ -138,10 +141,10 @@ statically linked binaries
 * Basics - interface
 - Specify behaviour of a method
 - Interfaces are implicitly satisfied
-.play a_stringer.go
+.play src/basics/a_stringer.go
 
 * Basics - interface - GOTCHA
-.play wrong_stringer.go
+.play src/basics/wrong_stringer.go
 
 * Basics - interface Examples
 - stringer
