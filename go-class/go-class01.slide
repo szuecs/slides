@@ -140,6 +140,9 @@ statically linked binaries
 - Interfaces are implicitly satisfied
 .play a_stringer.go
 
+* Basics - interface - GOTCHA
+.play wrong_stringer.go
+
 * Basics - interface Examples
 - stringer
     String() string
