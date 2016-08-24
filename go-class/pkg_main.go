@@ -16,6 +16,6 @@ func main() {
 	f := foo.New("A", "b")
 	println(f.HelloA())
 	// Compile time error: f.helloB()
-	// println(f.helloB()) // f.helloB undefined (cannot refer to unexported field or method
+	println(f.helloB()) // f.helloB undefined (cannot refer to unexported field or method
 	// foo.(*Foo)."".helloB)
 }

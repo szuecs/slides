@@ -27,7 +27,7 @@ func (s *RString) Reverse() *RString {
 }
 
 // START
-func (s *RString) String() string {
+func (s RString) String() string {
 	return s.S
 }
 
