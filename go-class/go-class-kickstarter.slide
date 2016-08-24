@@ -7,10 +7,10 @@ Tags: Go, TechAcademy
 Sandor Szücs
 NinjaEngineer, Zalando
 sandor.szuecs@zalando.de
-# TODO: https://sandor.szuecs.net/
+https://sandor.szuecs.net/
 @sszuecs
-[[https://github.com/szuecs/slides/][Slides available https://github.com/szuecs/slides/]]
-# [[TODO][Follow up: ]]
+[[http://go-talks.appspot.com/github.com/szuecs/slides/go-class/go-class-kickstarter.slide/][Slides available http://go-talks.appspot.com/github.com/szuecs/slides/go-class/go-class-kickstarter.slide/]]
+[[https://github.com/szuecs/slides/][Slides src available https://github.com/szuecs/slides/]]
 
 * Requirements
 - install https://golang.org/doc/install
@@ -90,7 +90,9 @@ statically linked binaries
       // TODO
   }
 
-* empty
+* expected result
+  $ GOPATH=`pwd` go run exame1.go
+  cba
 
 * Solution Exame 1
 .play src/exame1/exame1.go  /^func reverse/,/^}/
@@ -139,14 +141,17 @@ statically linked binaries
 .code src/exame2/src/rstring/rstring.go  /^\/\/ START/,/END/
 
 * Basics - interface
-- Specify behaviour of a method
+- Specify behaviour of a method defined by: (name, parameter, return value)
 - Interfaces are implicitly satisfied
-.play src/basics/a_stringer.go
+- Interfaces are composable
+- Interfaces is a solution for not having generics
+- Interfaces are some kind of dynamic dispatch
+- empty interface is similar to Object in java: interface{}
 
-* Basics - interface - GOTCHA
-.play src/basics/wrong_stringer.go
+* Basics - interface Example
+.play src/basics/interface.go
 
-* Basics - interface Examples
+* Basics - interface stdlib Examples
 - stringer
     String() string
 - io.Reader
@@ -155,8 +160,15 @@ statically linked binaries
     Len() int
     Less(i,j int) bool
     Swap(i,j int)
+
 * Basics - interfaces are composable
 .code src/basics/readwriter.go
+
+* Basics - implement Stringer interface
+.play src/basics/a_stringer.go
+
+* Basics - implement Stringer interface - GOTCHA
+.play src/basics/wrong_stringer.go
 
 * Exame 3 - Implement the stringer and sort interface on type RString and a list of RString
 
@@ -165,7 +177,7 @@ statically linked binaries
   type RString struct { S string }
 
   // String implements the stringer interface
-  func (s *RString) String() string {
+  func (s RString) String() string {
       // TODO
   }
 

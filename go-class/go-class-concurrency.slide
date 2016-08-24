@@ -1,0 +1,47 @@
+Go Class - Go Concurrency
+Zalando TechAcademy
+21:37 25 Feb 2016
+
+Tags: Go, Concurrency, TechAcademy
+
+Sandor Szücs
+NinjaEngineer, Zalando
+sandor.szuecs@zalando.de
+https://sandor.szuecs.net/
+@sszuecs
+[[http://go-talks.appspot.com/github.com/szuecs/slides/go-class/go-class-concurrency.slide/][Slides available http://go-talks.appspot.com/github.com/szuecs/slides/go-class/go-class-concurrency.slide/]]
+[[https://github.com/szuecs/slides/][Slides src available https://github.com/szuecs/slides/]]
+
+* Requirements
+- install https://golang.org/doc/install
+- set ENV: GOROOT, GOPATH, GOBIN
+- test: https://golang.org/doc/install#testing
+- You should have basic knowledge of Go, similar to Go Class Kickstarter
+
+* Concurrency
+  go func() // spawns func as a goroutine
+- no GIL --> good for CPU workload
+- paradigm: share data by communication
+.link https://divan.github.io/posts/go_concurrency_visualize/
+- use channels to orchestrate goroutines and share data
+.link https://golang.org/doc/effective_go.html#concurrency
+# .link http://blog.codeship.com/an-intro-to-concurrency-patterns-in-go/
+- if you really need to tune, remove channels and replace for example with sync.Mutex
+.link https://github.com/golang/go/wiki/MutexOrChannel
+
+* Concurrency - Mutex
+.play src/concurrency/mutex.go
+
+* Concurrency - Channel
+.play src/concurrency/channels.go
+
+####### slide magic
+# [[http://reallink][link name]]
+# .play -edit x.go
+# .code x.go /^func main/,/^}/
+# .play y.go
+# .image image.jpg
+# .iframe http://foo
+# .link http://foo label
+# .html file.html
+###################

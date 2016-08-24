@@ -1,0 +1,58 @@
+Go Class - Gin Microservices
+Zalando TechAcademy
+21:37 25 Feb 2016
+
+Tags: Go, Gin, TechAcademy
+
+Sandor Szücs
+NinjaEngineer, Zalando
+sandor.szuecs@zalando.de
+https://sandor.szuecs.net/
+@sszuecs
+[[http://go-talks.appspot.com/github.com/szuecs/slides/go-class/go-class-gin-microservices.slide/][Slides available http://go-talks.appspot.com/github.com/szuecs/slides/go-class/go-class-gin-microservices.slide/]]
+[[https://github.com/szuecs/slides/][Slides src available https://github.com/szuecs/slides/]]
+
+* Requirements
+- install https://golang.org/doc/install
+- set ENV: GOROOT, GOPATH, GOBIN
+- test: https://golang.org/doc/install#testing
+- You should have basic knowledge of Go, similar to Go Class Kickstarter
+
+* WebApps with Gin
+- Gin is fast: https://github.com/gin-gonic/go-http-routing-benchmark
+- better abstraction, f(Context) instead of f(Reader, Writer)
+- Microservice idea is based on
+.link http://txt.fliglio.com/2014/07/restful-microservices-in-go-with-gin/
+- Project with client/service in one src, HTTP/HTTPS and OAuth2:
+.link https://github.com/zalando-techmonkeys/chimp
+- OAuth2, Monitoring, Logging: gin-* middleware projects
+.link https://github.com/zalando-techmonkeys
+.link https://github.com/zalando-techmonkeys/gin-oauth2
+
+* WebApp skeleton
+.link https://github.com/szuecs/go-gin-webapp
+provides:
+- HTTPS
+- OAuth2 with Zalando IAM integration
+- Monitoring: metrics and /health
+- Logging with glog
+- microservice and an optional CLI client
+
+# TODO: testen (goal: < 5 minutes)
+* Demo - Webapp-Hello-world
+- add /hello endpoint
+- run and test
+- build Docker container
+- push to pierone
+- run in AWS or GCE
+
+####### slide magic
+# [[http://reallink][link name]]
+# .play -edit x.go
+# .code x.go /^func main/,/^}/
+# .play y.go
+# .image image.jpg
+# .iframe http://foo
+# .link http://foo label
+# .html file.html
+###################
