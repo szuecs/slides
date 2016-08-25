@@ -18,20 +18,26 @@ https://sandor.szuecs.net/
 - test: https://golang.org/doc/install#testing
 - You should have basic knowledge of Go, similar to Go Class 1
 
-* go tools #1
+* build and run
 - build
     % go build cmd/go-gin-webapp/server.go
 - build, run
     % go run cmd/go-gin-webapp/server.go
+
+* install
 - build, install to $GOBIN
-    % go install cmd/go-gin-webapp/server.go  # name: server
+    % go install cmd/go-gin-webapp/server.go  # name of the binary: server
     % go install ./...           # triple dot: install all binaries (name = subdirectory-name)
 - download, build, install (-u update)
     % go get -u github.com/gin-gonic/gin
     % go get github.com/zalando-techmonkeys/chimp/...
+- install all dependencies
+    % go get -t github.com/gin-gonic/gin
 
-* go tools #2
-- run tests
+* write tests
+TODO
+
+* run tests
     % go test ./... [-v]
     % go test -race                                  # race detector, no false positives
     % go test -cover ./...
@@ -40,22 +46,57 @@ https://sandor.szuecs.net/
     % go tool cover -html=coverage.out               # show in browser
 - callgraph: % callgraph
 
-# TODO: TEST this!
-* go tools #3
-- run benchmarks
+* write benchmarks
+TODO
+
+* run benchmarks
     % go test -run=^$ -bench=. | tee bench.0                 # run benchmarks
     % benchcmp bench.0 bench.1                               # compare benchmarks
-    % go test -run=^$ -bench=. -cpuprofile=prof.cpu          # record benchmarks and creates binary
-    % go test -run=^$ -bench=. -memprofile=prof.mem          # profile memory
-    % go tool pprof <binary> prof.cpu
-- profiling: % go tool pprof
+    % go test -run=^$ -bench=. -cpuprofile=prof.cpu          # generate cpu profile
+    % go test -run=^$ -bench=. -memprofile=prof.mem          # generate memory profile
+    % go tool pprof <binary> prof.cpu                        # run profile interface
+
+* profiling
+profiling: % go tool pprof
   (pprof) top        # show top functions
   (pprof) top --cum  # show top functions, cumulative
   (pprof) web        # show svg callgraph with times
   (pprof) list f     # show all lines in f() with profiling data
   (pprof) disasm f   # disassemble f()
 
-* go tools #4
+* webapp template as test project for profiling
+- go get -tu github.com/szuecs/go-gin-webapp/...
+- cd $GOPATH/src/github.com/szuecs/go-gin-webapp/
+- make config
+- make build.linux
+- ./build/linux/go-gin-webapp -v=2 -logtostderr -debug -profile
+
+* flamegraphs
+- Brendan Gregg http://www.brendangregg.com
+- Netflix
+- Master of tracing
+- dtrace
+- perf - linux trace tools
+- introduced flamegraphs
+
+* flamegraph Linux example - host
+.image host-flamegraph.svg 550 _
+
+* flamegraph Go example - service
+.image service-flamegraph.svg _ 1000
+
+* analyzing CPU - flamegraphs
+- [https://github.com/uber/go-torch](https://github.com/uber/go-torch)
+- go get github.com/uber/go-torch
+- git clone https://github.com/brendangregg/FlameGraph.git
+- generate load: for i in {1..2000}; do curl http://localhost:8080/ ; sleep 0.1 ; done
+- PATH=$PATH:/path/to/FlameGraph go-torch
+  - open torch.svg
+
+* analyzing memory usage
+TODO
+
+* other go tools
 - static analysis
     % go vet ./...  # examines Go source code and reports suspicious constructs
     % golint ./...
@@ -63,16 +104,17 @@ https://sandor.szuecs.net/
     % go doc strings # documentation system
     % godef          # code navigation: jump to definition and back
     % gofmt          # formats your code
-    % gofmt -r       # refacter / rewrite code
-    % gorename       # refacter / rewrite code
+    % gofmt -r       # refactor / rewrite code
+    % gorename       # refactor / rewrite code
     % goimports      # add/remove imports as needed and formats your code
     % oracle         # lookup caller, callee, callstack, implements, ..
     % gocode         # autocompletion
     % gotests        # generate test stubs from code
     % go-eldoc       # emacs eldoc integration
 
-* go tools #5
-- debugger: https://github.com/derekparker/delve
+* debugger
+- gdb
+- delve: https://github.com/derekparker/delve
 
 * Manage dependencies
 - godep
@@ -82,6 +124,7 @@ https://sandor.szuecs.net/
   TODO
 
 * Linker magic
+- --version example with code+Makefile
 TODO
 
 * Code generation
