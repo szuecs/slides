@@ -34,45 +34,98 @@ https://sandor.szuecs.net/
 - install all dependencies
     % go get -t github.com/gin-gonic/gin
 
-* write tests
-TODO
+* tests
+- Tests for `file.go` are defined in a separate file `file_test.go`
+- Tests are living in the same package and share package variables
+- `*_test.go` files import package `"testing"`
+- You should not use `const`, because you can not change for tests
+- Commonly used methods: `Fatal()` `Fail()` `FailNow()` `Log()` `Skip()`
+- Mitchel Hashimoto shows how to test the complicated cases [[http://bit.ly/1Sg5gY4][http://bit.ly/1Sg5gY4]]
+
+* write tests - code example
+file: foo/foo.go
+.code src/tests/foo/foo.go
+
+* write tests - test example
+file: foo/foo_test.go
+.code src/tests/foo/foo_test.go /func TestEqualsFoo/,/^}/
+
+.code src/tests/foo/foo.go
+
+* write tests - tabledriven test example
+.code src/tests/foo/foo_test.go /func TestEqualsFooTable/,/^}/
+
+* write tests - test example + run tests
+      [go-class/src/tests]% go test ./foo
+      ok      _/go-class/src/tests/foo        0.001s
+
+file: foo/foo_test.go
+.code src/tests/foo/foo_test.go /func TestEqualsFoo/,/^}/
 
 * run tests
-    % go test ./... [-v]
+    % go test .                                      # current package
+    % go test ./... [-v]                             # all packages below current directory
     % go test -race                                  # race detector, no false positives
-    % go test -cover ./...
-    % go test -coverprofile=coverage.out ./aspects   # write output
-    % go tool cover -func=coverage.out               # show in STDOUT
-    % go tool cover -html=coverage.out               # show in browser
-- callgraph: % callgraph
+    % go test -cover ./...                           # cuverage output
+    % go test -coverprofile=coverage.out ./aspects   # write coverprofile
+    % go tool cover -func=coverage.out               # use coverprofile: show in STDOUT
+    % go tool cover -html=coverage.out               # use coverprofile: show in browser
+
+* coverage in short
+    % go test -cover ./foo
+    ok      _/go-class/src/tests/foo        0.001s  coverage: 50.0% of statements
+
+* record coverage and show details later
+    % go test -coverprofile=coverage.out ./foo
+    ok      _/go-class/src/tests/foo        0.001s  coverage: 50.0% of statements
+    % go tool cover -func=coverage.out
+    tests/foo/foo.go:3:     EqualsFoo       100.0%
+    tests/foo/foo.go:7:     EqualsBar       0.0%
+    total:                  (statements)    50.0%
+
+* show coverage details in your browser
+    % go tool cover -html=coverage.out
+
+.image coverage_screenshot.png 500 _
+
+* coverage - if your repo is not below $GOPATH
+    # if files are not in GOPATH, set it locally
+    % GOPATH=/home/sszuecs/git/slides/go-class go test -coverprofile=coverage.out ./foo
+    ok      tests/foo       0.002s  coverage: 50.0% of statements
+
+* Exame Tests
+TODO
+
+* Solution Tests
+TODO
 
 * write benchmarks
 TODO
 
 * run benchmarks
-    % go test -run=^$ -bench=. | tee bench.0                 # run benchmarks
-    % benchcmp bench.0 bench.1                               # compare benchmarks
-    % go test -run=^$ -bench=. -cpuprofile=prof.cpu          # generate cpu profile
-    % go test -run=^$ -bench=. -memprofile=prof.mem          # generate memory profile
-    % go tool pprof <binary> prof.cpu                        # run profile interface
+    % go test -run=^$ -bench=. | tee bench.0            # run benchmarks
+    % benchcmp bench.0 bench.1                          # compare benchmarks
+    % go test -run=^$ -bench=. -cpuprofile=prof.cpu     # generate cpu profile
+    % go test -run=^$ -bench=. -memprofile=prof.mem     # generate memory profile
+    % go tool pprof <binary> prof.cpu                   # run profile interface
 
 * profiling
-profiling: % go tool pprof
-  (pprof) top        # show top functions
-  (pprof) top --cum  # show top functions, cumulative
-  (pprof) web        # show svg callgraph with times
-  (pprof) list f     # show all lines in f() with profiling data
-  (pprof) disasm f   # disassemble f()
+    % go tool pprof
+    (pprof) top        # show top functions
+    (pprof) top --cum  # show top functions, cumulative
+    (pprof) web        # show svg callgraph with times
+    (pprof) list f     # show all lines in f() with profiling data
+    (pprof) disasm f   # disassemble f()
 
 * webapp template as test project for profiling
-- go get -tu github.com/szuecs/go-gin-webapp/...
-- cd $GOPATH/src/github.com/szuecs/go-gin-webapp/
-- make config
-- make build.linux
-- ./build/linux/go-gin-webapp -v=2 -logtostderr -debug -profile
+    go get -tu github.com/szuecs/go-gin-webapp/...
+    cd $GOPATH/src/github.com/szuecs/go-gin-webapp/
+    make config
+    make build.linux
+    ./build/linux/go-gin-webapp -v=2 -logtostderr -debug -profile
 
 * flamegraphs
-- Brendan Gregg http://www.brendangregg.com
+- Brendan Gregg [[http://www.brendangregg.com][http://www.brendangregg.com]]
 - Netflix
 - Master of tracing
 - dtrace
@@ -86,7 +139,7 @@ profiling: % go tool pprof
 .image service-flamegraph.svg _ 1000
 
 * analyzing CPU - flamegraphs
-- [https://github.com/uber/go-torch](https://github.com/uber/go-torch)
+- [[https://github.com/uber/go-torch][https://github.com/uber/go-torch]]
 - go get github.com/uber/go-torch
 - git clone https://github.com/brendangregg/FlameGraph.git
 - generate load: for i in {1..2000}; do curl http://localhost:8080/ ; sleep 0.1 ; done
@@ -114,7 +167,7 @@ TODO
 
 * debugger
 - gdb
-- delve: https://github.com/derekparker/delve
+- delve: [[https://github.com/derekparker/delve][https://github.com/derekparker/delve]]
 
 * Manage dependencies
 - godep
