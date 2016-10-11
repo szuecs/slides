@@ -31,7 +31,7 @@ https://sandor.szuecs.net/
 - download, build, install (-u update)
     % go get -u github.com/gin-gonic/gin
     % go get github.com/zalando-techmonkeys/chimp/...
-- install all dependencies
+- install all dependencies including tests
     % go get -t github.com/gin-gonic/gin
 
 * tests
@@ -118,7 +118,7 @@ TODO
     (pprof) disasm f   # disassemble f()
 
 * webapp template as test project for profiling
-    go get -tu github.com/szuecs/go-gin-webapp/...
+    go get -u github.com/szuecs/go-gin-webapp/...
     cd $GOPATH/src/github.com/szuecs/go-gin-webapp/
     make config
     make build.linux
