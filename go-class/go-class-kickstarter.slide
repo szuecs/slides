@@ -65,11 +65,11 @@ statically linked binaries
 * Basics - loops
 .play src/basics/loop.go  /^func main/,/^}/
 
-* Basics - Pointers
-.play src/basics/ptr.go
-
 * Basics - struct
 .play src/basics/struct.go
+
+* Basics - Pointers
+.play src/basics/ptr.go
 
 * Basics - OO
 - no type hierarchy
