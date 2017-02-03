@@ -7,7 +7,7 @@ type Foo struct {
 }
 
 // implements stringer Interface
-func (f *Foo) String() string {
+func (f Foo) String() string {
 	return fmt.Sprintf("<Foo.A=%q>", f.A)
 }
 
