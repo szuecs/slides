@@ -6,7 +6,8 @@ type Foo struct {
 	A string
 }
 
-// To make it work use (f Foo) to not define it on pointers.  A
+// To satisfy the Stringer interface you have to define the receiver
+// on the type itself (f Foo) and not on a pointer type (f *Foo).  A
 // pointer to type Foo will automatically call String() defined on
 // (f Foo), too.
 func (f *Foo) String() string {
@@ -15,5 +16,7 @@ func (f *Foo) String() string {
 
 func main() {
 	fo := Foo{"another Foo"}
-	fmt.Println(fo) // => <Foo.A="another Foo">
+	fmt.Println(fo) // => {another Foo}
+	foo := &fo
+	fmt.Println(foo) // => <Foo.A="another Foo">
 }
