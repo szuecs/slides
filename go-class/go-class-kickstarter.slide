@@ -199,6 +199,8 @@ statically linked binaries
   [hello world a abc ab]
   [a ab abc hello world]
 
+.code src/exame3/exame3.go  /^\/\/ START/,/END/
+
 * Solution Exame 3
 .code src/exame3/src/rstring/rstring.go  /^\/\/ START/,/END/
 

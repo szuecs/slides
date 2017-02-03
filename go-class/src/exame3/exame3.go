@@ -6,11 +6,11 @@ import (
 	"sort"
 )
 
+// START exame3.go contains "package main"
 import "rstring"
 
 func main() {
 	rs := rstring.New("hello world")
-	fmt.Println(rs.Reverse())
 	rs1 := rstring.New("a")
 	rs2 := rstring.New("ab")
 	rs3 := rstring.New("abc")
@@ -19,5 +19,6 @@ func main() {
 	fmt.Printf("%v\n", ary)
 	sort.Sort(ary)
 	fmt.Printf("%v\n", ary)
-
 }
+
+// END

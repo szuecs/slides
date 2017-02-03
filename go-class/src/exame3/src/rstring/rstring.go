@@ -26,7 +26,7 @@ func (s *RString) Reverse() *RString {
 	return New(buf.String())
 }
 
-// START
+// START src/rstring/rstring.go "package rstring"
 func (s RString) String() string {
 	return s.S
 }
