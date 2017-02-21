@@ -5,7 +5,7 @@ Zalando TechAcademy
 Tags: Go, TechAcademy
 
 Sandor Szücs
-NinjaEngineer, Zalando
+SoftwareEngineer, Zalando
 sandor.szuecs@zalando.de
 https://sandor.szuecs.net/
 @sszuecs
@@ -76,7 +76,11 @@ statically linked binaries
 - structs, pointers and methods (call by reference)
 .play src/basics/basics_oo.go
 
-* Exame 1 - Write a function that implements string reverse (Hint: use bytes.Buffer)
+* Example stdlib - bytes.Buffer
+
+.play src/basics/bytes_buffer.go
+
+* Exame 1 - Write a function that implements string reverse (Hint: string is immutable, use bytes.Buffer)
 
   package main
 
@@ -241,11 +245,24 @@ statically linked binaries
 	}
 
 * Dependencies
-- Use godep
+- Use glide and wait for [[https://github.com/golang/dep][go dep]] :)
 
-    echo vendor >> .gitignore
-    echo Godeps/_workspace >> .gitignore
-    git add Godeps/Godeps.json
+    $ go get -u github.com/Masterminds/glide
+    $ glide create
+    $ vim glide.yaml
+    package: github.com/user/my-go-tool
+    import:
+    - package: github.com/zalando/gin-gomonitor
+      version: ^1.0.0
+    - package: gopkg.in/alecthomas/kingpin.v2
+      version: ~2.2.3
+    - package: gopkg.in/resty.v0
+      version: ~0.8.0
+    $ glide install
+    # work, work, work
+    # add new dependency
+    $ glide get github.com/Masterminds/cookoo
+    $ glide up
 
 * References - Learn GO
 .link https://tour.golang.org/welcome/1
