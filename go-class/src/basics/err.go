@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	fd, err := os.Open("readwriter.go") // idiom: return obj, err
+	fd, err := os.Open("./go-class/src/basics/readwriter.go") // idiom: return obj, err
 	if err != nil {
 		log.Fatal(err) // fail fast
 	}
