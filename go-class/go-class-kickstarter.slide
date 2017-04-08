@@ -11,6 +11,7 @@ https://sandor.szuecs.net/
 @sszuecs
 [[http://go-talks.appspot.com/github.com/szuecs/slides/go-class/go-class-kickstarter.slide/][Slides available http://go-talks.appspot.com/github.com/szuecs/slides/go-class/go-class-kickstarter.slide/]]
 [[https://github.com/szuecs/slides/][Slides src available https://github.com/szuecs/slides/]]
+[[https://gin-gonic.github.io/gin/][Gin webframework https://gin-gonic.github.io/gin/]]
 
 * Requirements
 - install https://golang.org/doc/install
