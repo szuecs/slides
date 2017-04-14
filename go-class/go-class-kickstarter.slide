@@ -1,17 +1,17 @@
 Go Class - Kickstarter
 Zalando TechAcademy
-16:23 09 Mar 2016
+12:57 14 Apr 2016
 
 Tags: Go, TechAcademy
 
 Sandor Szücs
-SoftwareEngineer, Zalando
+Software Engineer, Zalando
 sandor.szuecs@zalando.de
 https://sandor.szuecs.net/
 @sszuecs
 [[http://go-talks.appspot.com/github.com/szuecs/slides/go-class/go-class-kickstarter.slide][Slides available http://go-talks.appspot.com/github.com/szuecs/slides/go-class/go-class-kickstarter.slide]]
 [[https://github.com/szuecs/slides][Slides src available https://github.com/szuecs/slides]]
-[[https://gin-gonic.github.io/gin][Gin webframework https://gin-gonic.github.io/gin/]]
+[[https://gin-gonic.github.io/gin][Gin micro webframework https://gin-gonic.github.io/gin/]]
 
 * Requirements
 - install https://golang.org/doc/install
@@ -28,11 +28,11 @@ https://sandor.szuecs.net/
 - Concurrency + no GIL: CPU bound computation can use more then 1 core
 - support for Closures (Lambda, anonymous functions)
 - Easy to read and to write
-- Tooling
+- Tooling ([[https://golang.org/pkg/testing/][testing]], [[https://golang.org/pkg/testing/#example_B_RunParallel][benchmarking]], [[https://golang.org/pkg/net/http/pprof/][profiling]], [[https://golang.org/cmd/trace/][tracing]], [[https://github.com/uber/go-torch][flamegraph]])
 
-statically linked binaries
+*statically* *linked* binaries (no libc required!):
 
-- docker container < 20MB (you only need: FROM scratch)
+- Docker container *<* *20MB* (you only need: *FROM* *scratch*, or use FROM registry.opensource.zalan.do/stups/alpine, if you need internal ZalandoCA)
 - create clients for all major OS (Linux, MacOSX, Windows)
 
 * Why go?
@@ -49,12 +49,12 @@ statically linked binaries
 .play src/basics/hello.go
 
 * Goals of Go
-- The efficiency of a statically-typed compiled language
-- with ease of programming of a dynamic language.
+- The *efficiency* of a statically-typed compiled language
+- with *ease* of programming of a dynamic language.
 - Safety: type-safe and memory-safe.
-- Good support for concurrency and communication.
-- Efficient, latency-free garbage collection.
-- High-speed compilation. (1.5 and 1.6 slower but better ASM)
+- Good support for *concurrency* and communication.
+- Efficient, *latency-free* garbage collection.
+- *High-speed* compilation. (1.5 was slower but better ASM)
 .caption Goals 2009 by Rob Pike
 
 * Basics - var, utf8
@@ -63,25 +63,33 @@ statically linked binaries
 * Basics - branches
 .play src/basics/branches.go /^func main/,/^}/
 
-* Basics - loops
-.play src/basics/loop.go  /^func main/,/^}/
+* Basics - loops - forever & while
+.code src/basics/loop.go
+
+* Basics - loops - index & range
+.play src/basics/loop_range.go  /^func main/,/^}/
 
 * Basics - Pointers
 .play src/basics/ptr.go
+
+* Basics - functions
+- Function arguments are always call by value also pointers will be copied!
+- A function signature can be used as a type
+.play src/basics/functions.go /type f/,/END/
 
 * Basics - struct
 .play src/basics/struct.go
 
 * Basics - OO
 - no type hierarchy
-- structs, pointers and methods (call by reference)
+- structs, pointers and methods
 .play src/basics/basics_oo.go
 
 * Example stdlib - bytes.Buffer
 
 .play src/basics/bytes_buffer.go
 
-* Exame 1 - Write a function that implements string reverse (Hint: string is immutable, use bytes.Buffer)
+* Exame 1 - Write a function that implements string reverse (Hint: string is immutable, use bytes.Buffer or a = append(a, s[2]))
 
   package main
 
@@ -103,7 +111,7 @@ statically linked binaries
 .play src/exame1/exame1.go  /^func reverse/,/^}/
 
 * err idiom - example
-.play src/basics/err.go /^func main/,/^}/
+.play src/basics/err.go /^func read/,/END/
 
 * Basics - package and exported names
 - package declaration creates a namespace for variables, types, methods, functions, ..
@@ -121,11 +129,11 @@ statically linked binaries
   	S string
   }
 
-  func New(s string) *RString {
-  	return &RString{S: s}
+  func New(s string) RString {
+  	return RString{S: s}
   }
 
-  func (s *RString) Reverse() *RString {
+  func (s RString) Reverse() RString {
         // TODO
   }
 
@@ -139,7 +147,7 @@ statically linked binaries
 
 * expected result
   $ GOPATH=`pwd` go run exame2.go
-  &{dlrow olleh}
+  {dlrow olleh}
 
 * Solution Exame 2
 .code src/exame2/src/rstring/rstring.go  /^import .*/,/\)/
