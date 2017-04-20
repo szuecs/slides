@@ -11,6 +11,8 @@ https://sandor.szuecs.net/
 @sszuecs
 [[http://go-talks.appspot.com/github.com/szuecs/slides/go-class/go-class-kickstarter.slide][Slides available http://go-talks.appspot.com/github.com/szuecs/slides/go-class/go-class-kickstarter.slide]]
 [[https://github.com/szuecs/slides][Slides src available https://github.com/szuecs/slides]]
+[[https://pages.github.bus.zalan.do/teapot/docs/dev-guide/howtos/glide.html][How to use glide]]
+[[https://docs.google.com/document/d/1Bcr6y61N47E-erV2FPCdUw6QNC4Q78l4y9NALYTNFVM][Teapot Go standards]]
 [[https://gin-gonic.github.io/gin][Gin micro webframework https://gin-gonic.github.io/gin/]]
 
 * Requirements
@@ -254,7 +256,7 @@ https://sandor.szuecs.net/
 	}
 
 * Dependencies
-- Use glide and wait for [[https://github.com/golang/dep][go dep]] :)
+- Use [[https://github.com/Masterminds/glide][glide]] and wait for [[https://github.com/golang/dep][go dep]] :)
 
     $ go get -u github.com/Masterminds/glide
     $ glide create
