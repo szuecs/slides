@@ -1,13 +1,12 @@
 // call it from a main
 package main
 
+// START exame3.go contains "package main"
 import (
 	"fmt"
+	"rstring"
 	"sort"
 )
-
-// START exame3.go contains "package main"
-import "rstring"
 
 func main() {
 	rs := rstring.New("hello world")

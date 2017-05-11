@@ -142,6 +142,7 @@ https://sandor.szuecs.net/
   // run it: $ GOPATH=`pwd` go run exame2.go
   // $ cat ./exame2.go
   package main
+  import "rstring"
   func main() {
     rs := rstring.New("hello world")
     fmt.Println(rs.Reverse())
