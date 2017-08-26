@@ -264,7 +264,7 @@ https://sandor.szuecs.net/
     $ vim glide.yaml
     package: github.com/user/my-go-tool
     import:
-    - package: github.com/zalando/gin-gomonitor
+    - package: github.com/szuecs/gin-gomonitor
       version: ^1.0.0
     - package: gopkg.in/alecthomas/kingpin.v2
       version: ~2.2.3
