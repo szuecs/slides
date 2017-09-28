@@ -161,7 +161,7 @@ https://sandor.szuecs.net/
 - Interfaces are implicitly satisfied
 - Interfaces are composable
 - Interfaces is a solution for not having generics
-- Interfaces are some kind of dynamic dispatch
+- Interfaces are dynamic dispatch
 - empty interface is similar to Object in java: interface{}
 
 * Basics - interface Example
