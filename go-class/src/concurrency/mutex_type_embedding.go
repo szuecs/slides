@@ -3,28 +3,30 @@ package main
 import (
 	"fmt"
 	"sync"
+	"time"
 )
 
 //START
-var syncedCounter struct {
-	lock sync.Mutex
-	n    int
+type Counter struct {
+	sync.Mutex // type embedding
+	n          int
 }
 
-func inc() {
-	syncedCounter.lock.Lock()
-	syncedCounter.n++
-	syncedCounter.lock.Unlock()
+func (c *Counter) inc() {
+	c.Lock()
+	c.n++
+	c.Unlock()
 }
 
 func main() {
-	fmt.Printf("n: %d\n", syncedCounter.n)
+	syncedCounter := &Counter{}
 	for i := 1; i < 10; i++ {
 		go func() { // goroutine + anonymous function
-			inc()
+			syncedCounter.inc()
 			fmt.Printf("n: %d\n", syncedCounter.n)
 		}() // invoke
 	}
+	time.Sleep(100 * time.Millisecond)
 	fmt.Printf("n: %d\n", syncedCounter.n)
 }
 
