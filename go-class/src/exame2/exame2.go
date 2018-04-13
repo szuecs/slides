@@ -5,6 +5,6 @@ import "fmt"
 import "rstring"
 
 func main() {
-	rs := rstring.New("hello world")
+	rs := rstring.NewRString("hello world")
 	fmt.Println(rs.Reverse())
 }

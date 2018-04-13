@@ -1,6 +1,6 @@
 Go Class - Kickstarter
 Zalando TechAcademy
-09:00 20 Apr 2017
+09:30 23 Feb 2018
 
 Tags: Go, TechAcademy
 
@@ -131,7 +131,7 @@ https://sandor.szuecs.net/
   	S string
   }
 
-  func New(s string) RString {
+  func NewRString(s string) RString {
   	return RString{S: s}
   }
 
@@ -144,7 +144,7 @@ https://sandor.szuecs.net/
   package main
   import "rstring"
   func main() {
-    rs := rstring.New("hello world")
+    rs := rstring.NewRString("hello world")
     fmt.Println(rs.Reverse())
   }
 

@@ -9,10 +9,10 @@ import (
 )
 
 func main() {
-	rs := rstring.New("hello world")
-	rs1 := rstring.New("a")
-	rs2 := rstring.New("ab")
-	rs3 := rstring.New("abc")
+	rs := rstring.NewRString("hello world")
+	rs1 := rstring.NewRString("a")
+	rs2 := rstring.NewRString("ab")
+	rs3 := rstring.NewRString("abc")
 
 	ary := rstring.SortableRString{rs, rs1, rs3, rs2}
 	fmt.Printf("%v\n", ary)

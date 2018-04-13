@@ -1,5 +1,5 @@
-// Package foo is an example that shows the idea of a package.
-package foo
+// Package x is an example that shows the idea of a package.
+package x
 
 // Foo is written capitalized, so it's exported
 type Foo struct {
@@ -8,7 +8,7 @@ type Foo struct {
 }
 
 // New is an exported package function that returns the reference of a newly created object Foo
-func New(a, b string) *Foo {
+func NewFoo(a, b string) *Foo {
 	return &Foo{a, b}
 }
 

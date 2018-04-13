@@ -9,7 +9,7 @@ type RString struct {
 	S string
 }
 
-func New(s string) RString {
+func NewRString(s string) RString {
 	return RString{S: s}
 }
 
@@ -23,7 +23,7 @@ func (s RString) Reverse() RString {
 		}
 	}
 
-	return New(buf.String())
+	return NewRString(buf.String())
 }
 
 // START src/rstring/rstring.go "package rstring"
