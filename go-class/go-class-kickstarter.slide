@@ -1,6 +1,8 @@
 Go Class - Kickstarter
 Zalando TechAcademy
-09:30 23 Feb 2018
+09:30 13 Jun 2018
+
+
 
 Tags: Go, TechAcademy
 
@@ -117,7 +119,7 @@ https://sandor.szuecs.net/
 
 * Basics - package and exported names
 - package declaration creates a namespace for variables, types, methods, functions, ..
-.code src/foo/a.go
+.code src/x/a.go
 
 * Basics - package and exported names
 .code pkg_main.go
