@@ -1,6 +1,6 @@
 Go Class - Kickstarter
 Zalando TechAcademy
-09:30 13 Jun 2018
+09:30 16 Nov 2018
 
 
 
@@ -13,9 +13,9 @@ https://sandor.szuecs.net/
 @sszuecs
 [[http://go-talks.appspot.com/github.com/szuecs/slides/go-class/go-class-kickstarter.slide][Slides available http://go-talks.appspot.com/github.com/szuecs/slides/go-class/go-class-kickstarter.slide]]
 [[https://github.com/szuecs/slides][Slides src available https://github.com/szuecs/slides]]
-[[https://pages.github.bus.zalan.do/teapot/docs/dev-guide/howtos/glide.html][How to use glide]]
 [[https://docs.google.com/document/d/1Bcr6y61N47E-erV2FPCdUw6QNC4Q78l4y9NALYTNFVM][Teapot Go standards]]
 [[https://gin-gonic.github.io/gin][Gin micro webframework https://gin-gonic.github.io/gin/]]
+[[https://github.com/mikkeloscar/gin-swagger][Gin swagger: https://github.com/mikkeloscar/gin-swagger]]
 
 * Requirements
 - install https://golang.org/doc/install
@@ -92,6 +92,13 @@ https://sandor.szuecs.net/
 * Example stdlib - bytes.Buffer
 
 .play src/basics/bytes_buffer.go
+
+* Sides available
+
+http://go-talks.appspot.com/github.com/szuecs/slides/go-class/go-class-kickstarter.slide
+
+Google chat: #guild-golang
+
 
 * Exame 1 - Write a function that implements string reverse (Hint: string is immutable, use bytes.Buffer or a = append(a, s[2]))
 
@@ -259,31 +266,25 @@ https://sandor.szuecs.net/
 	}
 
 * Dependencies
-- Use [[https://github.com/Masterminds/glide][glide]] and wait for [[https://github.com/golang/dep][go dep]] :)
+- Use Go modules!
+- in Go1.11 you have to opt-in and enable with:
 
-    $ go get -u github.com/Masterminds/glide
-    $ glide create
-    $ vim glide.yaml
-    package: github.com/user/my-go-tool
-    import:
-    - package: github.com/szuecs/gin-gomonitor
-      version: ^1.0.0
-    - package: gopkg.in/alecthomas/kingpin.v2
-      version: ~2.2.3
-    - package: gopkg.in/resty.v0
-      version: ~0.8.0
-    $ glide install
-    # work, work, work
-    # add new dependency
-    $ glide get github.com/Masterminds/cookoo
-    $ glide up
+        GO111MODULE=on go build .
+
+- checkout the Go wiki: [[https://github.com/golang/go/wiki/Modules][https://github.com/golang/go/wiki/Modules]]
+
+
+old:
+- [[https://github.com/Masterminds/glide][glide]] glide.yaml + glide.lock
+- [[https://github.com/golang/dep][go dep]] Gopkg.toml + Gopkg.lock
+    ...
+
 
 * References - Learn GO
 .link https://tour.golang.org/welcome/1
 .link https://golang.org/doc/code.html
 .link https://golang.org/doc/effective_go.html
 .link https://talks.golang.org/2014/names.slide#1
-.link http://www.infoq.com/news/2016/03/go-patterns
 
 ####### slide magic
 # [[http://reallink][link name]]
