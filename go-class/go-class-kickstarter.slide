@@ -1,6 +1,6 @@
 Go Class - Kickstarter
 Zalando TechAcademy
-09:30 16 Nov 2018
+09:30 07 Feb 2019
 
 
 
@@ -16,6 +16,7 @@ https://sandor.szuecs.net/
 [[https://docs.google.com/document/d/1Bcr6y61N47E-erV2FPCdUw6QNC4Q78l4y9NALYTNFVM][Teapot Go standards]]
 [[https://gin-gonic.github.io/gin][Gin micro webframework https://gin-gonic.github.io/gin/]]
 [[https://github.com/mikkeloscar/gin-swagger][Gin swagger: https://github.com/mikkeloscar/gin-swagger]]
+[[https://bit.ly/2BQrSRq][Feedback https://bit.ly/2BQrSRq]]
 
 * Requirements
 - install https://golang.org/doc/install
@@ -284,7 +285,11 @@ old:
 .link https://tour.golang.org/welcome/1
 .link https://golang.org/doc/code.html
 .link https://golang.org/doc/effective_go.html
-.link https://talks.golang.org/2014/names.slide#1
+.link https://talks.golang.org/
+
+* Feedback
+[[https://bit.ly/2BQrSRq][https://bit.ly/2BQrSRq]]
+
 
 ####### slide magic
 # [[http://reallink][link name]]
