@@ -1,6 +1,6 @@
 Go Class - Kickstarter
 Zalando TechAcademy
-09:30 07 Feb 2019
+09:30 25 Apr 2019
 
 
 
@@ -11,7 +11,7 @@ Software Engineer, Zalando
 sandor.szuecs@zalando.de
 https://sandor.szuecs.net/
 @sszuecs
-[[http://go-talks.appspot.com/github.com/szuecs/slides/go-class/go-class-kickstarter.slide][Slides available http://go-talks.appspot.com/github.com/szuecs/slides/go-class/go-class-kickstarter.slide]]
+[[https://go-talks.appspot.com/github.com/szuecs/slides/go-class/go-class-kickstarter.slide][Slides available https://go-talks.appspot.com/github.com/szuecs/slides/go-class/go-class-kickstarter.slide]]
 [[https://github.com/szuecs/slides][Slides src available https://github.com/szuecs/slides]]
 [[https://docs.google.com/document/d/1Bcr6y61N47E-erV2FPCdUw6QNC4Q78l4y9NALYTNFVM][Teapot Go standards]]
 [[https://gin-gonic.github.io/gin][Gin micro webframework https://gin-gonic.github.io/gin/]]
