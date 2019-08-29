@@ -1,6 +1,6 @@
 Go Class - Kickstarter
 Zalando TechAcademy
-09:30 25 Apr 2019
+09:30 29 Aug 2019
 
 
 
@@ -13,14 +13,15 @@ https://sandor.szuecs.net/
 @sszuecs
 [[https://go-talks.appspot.com/github.com/szuecs/slides/go-class/go-class-kickstarter.slide][Slides available https://go-talks.appspot.com/github.com/szuecs/slides/go-class/go-class-kickstarter.slide]]
 [[https://github.com/szuecs/slides][Slides src available https://github.com/szuecs/slides]]
-[[https://docs.google.com/document/d/1Bcr6y61N47E-erV2FPCdUw6QNC4Q78l4y9NALYTNFVM][Teapot Go standards]]
+[[https://docs.google.com/document/d/1Bcr6y61N47E-erV2FPCdUw6QNC4Q78l4y9NALYTNFVM][Old Teapot Go standards]]
+[[https://blog.golang.org/][official Go Blog]]
 [[https://gin-gonic.github.io/gin][Gin micro webframework https://gin-gonic.github.io/gin/]]
 [[https://github.com/mikkeloscar/gin-swagger][Gin swagger: https://github.com/mikkeloscar/gin-swagger]]
 [[https://bit.ly/2BQrSRq][Feedback https://bit.ly/2BQrSRq]]
 
 * Requirements
 - install https://golang.org/doc/install
-- set ENV: GOROOT, GOPATH, GOBIN
+- optional: set ENV: GOROOT, GOPATH, GOBIN
 - test: https://golang.org/doc/install#testing
 - If you are not prepared, use [[https://play.golang.org/][https://play.golang.org/]]
 
@@ -238,6 +239,7 @@ Google chat: #guild-golang
 - type inference:  x := 0  // same as: var x int = 0
 - no generics -> use interfaces or code generation
 - no exceptions -> use err != nil check and defer fd.Close()
+- *new*: Generics are now a proposal at [[https://blog.golang.org/why-generics]]
 
 * array, slice, map
 - array: static size!
@@ -285,6 +287,7 @@ old:
 .link https://tour.golang.org/welcome/1
 .link https://golang.org/doc/code.html
 .link https://golang.org/doc/effective_go.html
+.link https://blog.golang.org/
 .link https://talks.golang.org/
 
 * Feedback
