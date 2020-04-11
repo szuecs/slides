@@ -50,7 +50,7 @@ https://sandor.szuecs.net/
 
 * Hello World
     % go run hello.go
-.play src/basics/hello.go
+.play -edit src/basics/hello.go
 
 * Goals of Go
 - The *efficiency* of a statically-typed compiled language
@@ -62,36 +62,36 @@ https://sandor.szuecs.net/
 .caption Goals 2009 by Rob Pike
 
 * Basics - var, utf8
-.play src/basics/basics.go
+.play -edit src/basics/basics.go
 
 * Basics - branches
-.play src/basics/branches.go /^func main/,/^}/
+.play -edit src/basics/branches.go /^func main/,/^}/
 
 * Basics - loops - forever & while
 .code src/basics/loop.go
 
 * Basics - loops - index & range
-.play src/basics/loop_range.go  /^func main/,/^}/
+.play -edit src/basics/loop_range.go  /^func main/,/^}/
 
 * Basics - Pointers
-.play src/basics/ptr.go
+.play -edit src/basics/ptr.go
 
 * Basics - functions
 - Function arguments are always call by value also pointers will be copied!
 - A function signature can be used as a type
-.play src/basics/functions.go /type f/,/END/
+.play -edit src/basics/functions.go /type f/,/END/
 
 * Basics - struct
-.play src/basics/struct.go
+.play -edit src/basics/struct.go
 
 * Basics - OO
 - no type hierarchy
 - structs, pointers and methods
-.play src/basics/basics_oo.go
+.play -edit src/basics/basics_oo.go
 
 * Example stdlib - bytes.Buffer
 
-.play src/basics/bytes_buffer.go
+.play -edit src/basics/bytes_buffer.go
 
 * Slides available
 
@@ -119,10 +119,10 @@ Google chat: #guild-golang
   cba
 
 * Solution Exame 1
-.play src/exame1/exame1.go  /^func reverse/,/^}/
+.play -edit src/exame1/exame1.go  /^func reverse/,/^}/
 
 * err idiom - example
-.play src/basics/err.go /^func read/,/END/
+.play -edit src/basics/err.go /^func read/,/END/
 
 * Basics - package and exported names
 - package declaration creates a namespace for variables, types, methods, functions, ..
@@ -174,7 +174,7 @@ Google chat: #guild-golang
 - empty interface is similar to Object in java: interface{}
 
 * Basics - interface Example
-.play src/basics/interface.go
+.play -edit src/basics/interface.go
 
 * Basics - interface stdlib Examples
 - stringer
@@ -190,10 +190,10 @@ Google chat: #guild-golang
 .code src/basics/readwriter.go
 
 * Basics - implement Stringer interface
-.play src/basics/a_stringer.go
+.play -edit src/basics/a_stringer.go
 
 * Basics - implement Stringer interface - GOTCHA
-.play src/basics/wrong_stringer.go
+.play -edit src/basics/wrong_stringer.go
 
 * Exame 3 - Implement the stringer and sort interface on type RString and a list of RString
 
