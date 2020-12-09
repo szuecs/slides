@@ -25,6 +25,24 @@ https://sandor.szuecs.net/
 - test: https://golang.org/doc/install#testing
 - If you are not prepared, use [[https://play.golang.org/][https://play.golang.org/]]
 
+* Editors
+
+[[https://github.com/golang/tools/tree/master/gopls][gopls]] (pronounced: "go please") is the official language server for the Go language.
+
+gopls enabled:
+- emacs: [[https://github.com/golang/tools/blob/master/gopls/doc/emacs.md][use gopls]]
+- nvim/vim: [[https://github.com/golang/tools/blob/master/gopls/doc/vim.md][use gopls]]
+- [[https://code.visualstudio.com/][VSCode]]: [[https://github.com/golang/tools/blob/master/gopls/doc/vscode.md][use gopls]]
+
+no gopls:
+- [[https://www.jetbrains.com/go/][GoLand]] IDE
+
+* Slides available
+
+- [[http://go-talks.appspot.com/github.com/mneverov/slides/go-class/go-class-kickstarter.slide][slides]]
+- Google chat: [[https://chat.google.com/room/AAAA5wplaCc][#guild-golang]]
+- Feedback form: [[https://bit.ly/2wpJF1O][https://bit.ly/2wpJF1O]]
+
 * Why go?
 .image gopher.jpeg
 .caption _Gopher_ by [[http://www.reneefrench.com][Renée French]]
@@ -58,7 +76,7 @@ https://sandor.szuecs.net/
 - Safety: type-safe and memory-safe.
 - Good support for *concurrency* and communication.
 - Efficient, *latency-free* garbage collection.
-- *High-speed* compilation. (1.5 was slower but better ASM)
+- *High-speed* compilation.
 .caption Goals 2009 by Rob Pike
 
 * Basics - var, utf8
@@ -237,7 +255,7 @@ Google chat: #guild-golang
 - type inference:  x := 0  // same as: var x int = 0
 - no generics -> use interfaces or code generation
 - no exceptions -> use err != nil check and defer fd.Close()
-- *new*: Generics are now a proposal at [[https://blog.golang.org/why-generics]]
+- [[https://blog.golang.org/generics-next-step][Generics next step]], [[https://go2goplay.golang.org/][playground]]
 
 * array, slice, map
 - array: static size!
@@ -287,6 +305,9 @@ old:
 .link https://golang.org/doc/effective_go.html
 .link https://blog.golang.org/
 .link https://talks.golang.org/
+
+.link https://learning.oreilly.com/videos/intermediate-go-programming/9781491944073
+.link https://learning.oreilly.com/learning-paths/learning-path-go/9781491990384/
 
 * Feedback
 [[https://bit.ly/2BQrSRq][https://bit.ly/2BQrSRq]]
