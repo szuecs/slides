@@ -1,6 +1,6 @@
 Go Class - Kickstarter
 Zalando TechAcademy
-09:30 24 Oct 2019
+10:00 27 Jan 2021
 
 
 
@@ -46,6 +46,8 @@ no gopls:
 * Why go?
 .image gopher.jpeg
 .caption _Gopher_ by [[http://www.reneefrench.com][Renée French]]
+: best mascot, created by Wife of Rob Pike
+
 
 * Why go?
 - Fast and fast to compile
@@ -90,6 +92,16 @@ no gopls:
 
 * Basics - loops - index & range
 .play src/basics/loop_range.go  /^func main/,/^}/
+
+* Basics - slices
+
+  a := []byte{"H", "e", "l", "l", "o"}
+  var b []int
+
+  // pre allocate and later use: c = append(c, "foo")
+  c := make([]string, 0, 10) // type, len, cap
+
+.image go_slice_memory.png
 
 * Basics - Pointers
 .play src/basics/ptr.go

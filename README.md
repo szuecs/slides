@@ -9,6 +9,6 @@ Install golang.org/x/tools/present, for example install a bunch of useful go too
 ## Run
 
     % cd go-class
-    % present
+    % present -base ~/go/src/golang.org/x/tools/cmd/present 
 
 Open http://127.0.0.1:3999 in your browser and choose one of the available slides.
