@@ -271,12 +271,17 @@ Google chat: #guild-golang
 
 * array, slice, map
 - array: static size!
+
     ary := [10]int64
     ary2 := [...]float64{7.0, 8.5, 9.1}
+
 - slice: array that can grow
+
     sl := []int64
     sl2 := []float64{7.0, 8.5, 9.1}
+
 - map: HashMap
+
    h := map[string]int {
       "foo": 23,
       "bar": 42,
